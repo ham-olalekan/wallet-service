@@ -18,6 +18,7 @@ import {
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import { query } from 'express';
 
 @Injectable()
 export class TransactionService {
@@ -159,6 +160,7 @@ export class TransactionService {
 
     const queryBuilder = this.transactionRepo.createQueryBuilder("t");
     queryBuilder.orderBy('t.createdAt', 'DESC');
+    queryBuilder.distinctOn(["t.reference"]);
 
     return await paginate<WalletTransaction>(queryBuilder, opt)
   }
