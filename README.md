@@ -22,10 +22,13 @@ Make sure to follow all these steps exactly as explained below. Do not miss any 
 ### Start the Server with Docker
 Run the following Docker commands in the project root directory to run the application
 
-- `docker compose up --build`
+- `docker build -t wallet-service .`
+
+then run
+
+- `docker run wallet-service`
 
 OR
-
 ### Install the Dependencies
 install and run postgres server locally
 
