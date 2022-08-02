@@ -12,7 +12,7 @@ services:
       - ./pgdata:/var/lib/postgresql/data
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - '5432:5431'
+      - '5432:5432'
     networks:
       - zuvy
 
