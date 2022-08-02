@@ -40,16 +40,8 @@ Then run this command to install Nest.js
  Your application should be running on port 3000 
 
  
-
-
-
-
-    
-
-This will launch the Node server on port 8080. If that port is busy, you can set a different point in application.properties.
+This will launch the Node server on port 8080. If that port is busy, you can set a different point in .env file
 
 - import the postman collection with this link
-  https://www.getpostman.com/collections/a2389f0b19892e919271
+  https://www.getpostman.com/collections/ec13f334a8f344c89c8f
 
-### NB
-All API endpoints requires an header named *staffID* failure to provide this header will result in to 403 HTTP response
