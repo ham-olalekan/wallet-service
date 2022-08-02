@@ -45,4 +45,12 @@ export class TransactionController{
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,): Promise<Pagination<WalletTransaction>>{
         return await this.transactionService.getAllUserTransactions(userId, page, limit);
     }
+
+    @Get("/all")
+    @HttpCode(200)
+    public async fetchAllTransactions(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,): Promise<Pagination<WalletTransaction>>{
+        return await this.transactionService.getAllTransactions(page, limit);
+    }
 }
