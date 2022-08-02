@@ -1,0 +1,51 @@
+version: '3'
+services:
+  wallet-db:
+    image: postgres:11.5
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: '1234'
+      POSTGRES_USER: 'zuvy'
+      POSTGRES_DB: 'zuvy_wallet_service_db'
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - '5432:5431'
+    networks:
+      - zuvy
+
+  wallet-api:
+    build:
+      context: .
+      dockerfile: local/Dockerfile
+    restart: always
+    environment:
+      POSTGRES_HOST: wallet-db
+      POSTGRES_PORT: 5431
+      DB_PASSWORD: '1234'
+      DB_USER: 'zuvy'
+      DB_DATABASE: 'zuvy_wallet_service_db'
+      DB_LOGGING: 'true'
+      
+    env_file:
+      - .env
+    ports:
+      - '3000:80'
+    depends_on:
+      - wallet-db
+    networks:
+      - zuvy
+    volumes:
+      - ./:/usr/src/app
+      - exclude:/usr/src/app/node_modules/
+
+volumes:
+  pgdata:
+    external: false
+  exclude:
+
+networks:
+  zuvy:
+    driver: bridge
